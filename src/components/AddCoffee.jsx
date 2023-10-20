@@ -4,6 +4,7 @@ const AddCoffee = () => {
 
     const handleNewCoffee = e => {
         e.preventDefault();
+        
         const form = e.target;
         const name = form.name.value
         const chef = form.chef.value
@@ -14,7 +15,6 @@ const AddCoffee = () => {
         const newCoffee = {
             name, chef, supplier, category, details, photo
         }
-        console.log(newCoffee);
 
         fetch('http://localhost:3000/coffee', {
             method: 'POST',
@@ -25,7 +25,6 @@ const AddCoffee = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (data.insertedId) {
                     Swal.fire({
                         title: 'Success!',
@@ -34,6 +33,7 @@ const AddCoffee = () => {
                         confirmButtonText: 'Cool'
                     })
                 }
+                form.reset()
             })
     }
     return (
